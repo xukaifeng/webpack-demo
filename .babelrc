@@ -1,0 +1,25 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env", // 将es6转es5
+      {
+        "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/preset-react"
+  ]
+
+  // 执行顺序从下往上
+
+  // "plugins": [
+  //   [
+  //     "@babel/plugin-transform-runtime"
+  //     // {
+  //     //   corejs: 2,
+  //     //   helpers: true,
+  //     //   regenerator: true,
+  //     //   useESModules: false,
+  //     // },
+  //   ]
+  // ]
+}
