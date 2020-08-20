@@ -6,6 +6,7 @@
       {
         "corejs": 2
       }
-    ]
+    ],
+    "babel-plugin-dynamic-import-webpack"
   ]
 }
