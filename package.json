@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "bundle": "webpack",
+    "dev-build": "webpack  --config ./config/webpack.dev.js",
     "dev": "webpack-dev-server --config ./config/webpack.dev.js",
     "build": "webpack --config ./config/webpack.prod.js"
   },
@@ -38,6 +38,7 @@
     "@babel/polyfill": "^7.10.4",
     "@babel/runtime": "^7.11.2",
     "@babel/runtime-corejs2": "^7.11.2",
+    "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
