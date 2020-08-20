@@ -17,7 +17,6 @@ const devConfig = {
     open: true,
     port: 7001,
     hot: true,
-    hotOnly: true, // HMR失效不要做其他操作
   },
 };
 

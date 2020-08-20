@@ -7,12 +7,10 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     main: './src/index.js',
-    // sub: './src/index.js',
   },
   output: {
-    // publicPath: 'wwww.cdn.com', // 可以配置引入前缀，一般用户配置cdn地址
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
   },
 
   module: {
@@ -70,6 +68,8 @@ module.exports = {
   ],
 
   optimization: {
-    usedExports: true, // 在开发环境使用Tree Sharking
+    splitChunks: {
+      chunks: 'all',
+    },
   },
 };
