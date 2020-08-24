@@ -7,6 +7,6 @@
         "corejs": 2
       }
     ],
-    "babel-plugin-dynamic-import-webpack"
+    "@babel/plugin-syntax-dynamic-import"
   ]
 }
