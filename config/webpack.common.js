@@ -129,7 +129,7 @@ module.exports = {
       // 它还可以用于减小文件大小，以加快重建速度。
       minSize: 30000, // 表示在压缩前的最小模块大小,默认值是30kb
 
-      minChunks: 1, // 表示被引用次数，默认为1；
+      minChunks: 1, // 表示被引用次数，默认为1； 如lodash需要至少引用 {minChunks} 次才分割
       maxAsyncRequests: 6, // 按需加载时的最大并行请求数
       maxInitialRequests: 4, // 入口的最大并行请求数
       automaticNameDelimiter: '~', // 名称分隔符，默认是~
@@ -142,7 +142,7 @@ module.exports = {
           priority: -10, // 优先级，一个 chunk 很可能满足多个缓存组，会被抽取到优先级高的缓存组中
           minChunks: 2, // 最少被几个 chunk 引用
           reuseExistingChunk: true, // 如果该 chunk 中引用了已经被抽取的 chunk，直接引用该 chunk，不会重复打包代码
-          enforce: true, // 如果 cacheGroup 中没有设置 minSize ，则据此判断是否使用上层的 minSize ，true：则使用0，false：使用上层 minSize
+          // enforce: true, // 如果 cacheGroup 中没有设置 minSize ，则据此判断是否使用上层的 minSize ，true：则使用0，false：使用上层 minSize
         },
         default: {
           minChunks: 2,
