@@ -2,12 +2,13 @@ const path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { plugins } = require('../postcss.config');
 const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    main: './src/index.js',
+    index: './src/index.tsx',
   },
   output: {
     filename: '[name].js',
@@ -17,20 +18,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.(js|jsx|ts|tsx)$/,
         loader: 'babel-loader',
-      },
-      {
-        test: /\.(jpeg|pbg|jpg|gif)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 2048,
-            name: '[name]_[hash].[ext]',
-            outputPath: 'image/',
-          },
-        },
+        exclude: [/node_modules/, /public/, /(.|_)min\.js$/],
       },
       {
         test: /\.(less)$/,
@@ -57,9 +47,61 @@ module.exports = {
           'postcss-loader', // 添加css前缀
         ],
       },
+      {
+        test: /\.(jpeg|pbg|jpg|gif)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 2048,
+            name: '[name]_[hash].[ext]',
+            outputPath: 'image/',
+          },
+        },
+      },
+      {
+        test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 1024,
+            name: '[name].[contenthash:8].[ext]',
+            outputPath: 'fonts/',
+          },
+        },
+      },
+      {
+        test: /\.(png|jpg|gif|jpeg|ico|cur)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            name: '[name]_[contenthash:8].[ext]',
+            outputPath: 'image/',
+          },
+        },
+      },
     ],
   },
-
+  resolve: {
+    extensions: [
+      '.tsx',
+      '.ts',
+      '.js',
+      '.jsx',
+      '.less',
+      '.scss',
+      '.css',
+      '.json',
+    ],
+    plugins: [
+      // 将 tsconfig.json 中的路径配置映射到 webpack 中
+      new TsconfigPathsPlugin({
+        configFile: './tsconfig.json',
+      }),
+    ],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'webpack',
