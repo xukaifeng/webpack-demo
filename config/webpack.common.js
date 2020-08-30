@@ -3,8 +3,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const { plugins } = require('../postcss.config');
-const webpack = require('webpack');
 
 module.exports = {
   entry: {
