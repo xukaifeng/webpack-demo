@@ -1,11 +1,81 @@
 const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const prodConfig = {
   mode: 'production',
-  devtool: 'cheap-eval-source-map', // 生产
+
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'js/[name].[contenthash:8].bundle.js',
+    chunkFilename: 'js/[name].[contenthash:8].chunk.js',
+    publicPath: '/',
+  },
+
+  devtool: 'cheap-eval-source-map',
+
+  module: {
+    rules: [
+      {
+        test: /\.(less)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              modules: {
+                localIdentName: '[name]__[local]--[hash:base64:6]', // 模块化，编译后类名
+              },
+            },
+          },
+          'postcss-loader', // 添加css前缀
+          'less-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader', // 添加css前缀
+        ],
+      },
+    ],
+  },
 
   optimization: {
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({
+        // ExtractTextPlugin 或 MiniCssExtractPlugin导出的文件名
+        assetNameRegExp: /\.css$/g,
+        // 用于优化/最小化CSS的CSS处理器，默认为cssnano
+        cssProcessor: require('cssnano'),
+        cssProcessorPluginOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: {
+                removeAll: true,
+              },
+            },
+          ],
+        },
+        // 控制插件是否可以将消息打印到控制台，默认为 true
+        canPrint: true,
+      }),
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+        // include: ['src/'],
+        exclude: /\.min\.js$/,
+        parallel: true,
+        cache: true,
+        // sourceMap: true,
+      }),
+    ],
     splitChunks: {
       // chunks: 'async', // 仅对异步的代码进行同步分割
       // 默认为 async （只针对异步块进行拆分），值为 all/initial/async/function(chunk) ,值为 function 时第一个参数为遍历所有入口 chunk 时的 chunk 模块，chunk._modules 为 chunk 所有依赖的模块，
@@ -47,6 +117,12 @@ const prodConfig = {
       },
     },
   },
+
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash:8].css',
+    }),
+  ],
 };
 
 module.exports = merge(commonConfig, prodConfig);

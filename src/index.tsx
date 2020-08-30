@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import _ from 'lodash';
+import styles from './index.less';
 
 class App extends React.Component {
   render() {
@@ -8,7 +9,7 @@ class App extends React.Component {
     const temp = _.cloneDeep(test);
     temp.a = 3;
     console.log(test, temp);
-    return <div>hello world</div>;
+    return <div className={styles.testBox}>hello world</div>;
   }
 }
 

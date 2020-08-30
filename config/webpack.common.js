@@ -10,10 +10,6 @@ module.exports = {
   entry: {
     index: './src/index.tsx',
   },
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, '../dist'),
-  },
 
   module: {
     rules: [
@@ -21,31 +17,6 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         loader: 'babel-loader',
         exclude: [/node_modules/, /public/, /(.|_)min\.js$/],
-      },
-      {
-        test: /\.(less)$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              modules: {
-                localIdentName: '[name]__[local]--[hash:base64:5]', // 编译后类名
-              },
-            },
-          },
-          'postcss-loader', // 添加css前缀
-          'less-loader',
-        ],
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader', // 添加css前缀
-        ],
       },
       {
         test: /\.(jpeg|pbg|jpg|gif)$/,
@@ -85,16 +56,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [
-      '.tsx',
-      '.ts',
-      '.js',
-      '.jsx',
-      '.less',
-      '.scss',
-      '.css',
-      '.json',
-    ],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.less', '.css', '.json'],
     plugins: [
       // 将 tsconfig.json 中的路径配置映射到 webpack 中
       new TsconfigPathsPlugin({
@@ -107,7 +69,9 @@ module.exports = {
       title: 'webpack',
       template: 'src/index.html',
     }),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [path.resolve('dist')],
+    }),
     // 打包缓存 https://github.com/mzgoddard/hard-source-webpack-plugin
     new HardSourceWebpackPlugin({
       // cacheDirectory是在高速缓存写入。默认情况下，将缓存存储在node_modules下的目录中
@@ -151,4 +115,8 @@ module.exports = {
       },
     }),
   ],
+
+  optimization: {
+    usedExports: true,
+  },
 };
