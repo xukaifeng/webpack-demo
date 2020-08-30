@@ -49,24 +49,6 @@ const prodConfig = {
 
   optimization: {
     minimizer: [
-      new OptimizeCSSAssetsPlugin({
-        // ExtractTextPlugin 或 MiniCssExtractPlugin导出的文件名
-        assetNameRegExp: /\.css$/g,
-        // 用于优化/最小化CSS的CSS处理器，默认为cssnano
-        cssProcessor: require('cssnano'),
-        cssProcessorPluginOptions: {
-          preset: [
-            'default',
-            {
-              discardComments: {
-                removeAll: true,
-              },
-            },
-          ],
-        },
-        // 控制插件是否可以将消息打印到控制台，默认为 true
-        canPrint: true,
-      }),
       new TerserPlugin({
         test: /\.js(\?.*)?$/i,
         // include: ['src/'],
@@ -121,6 +103,24 @@ const prodConfig = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css',
+    }),
+    new OptimizeCSSAssetsPlugin({
+      // ExtractTextPlugin 或 MiniCssExtractPlugin导出的文件名
+      assetNameRegExp: /\.css$/g,
+      // 用于优化/最小化CSS的CSS处理器，默认为cssnano
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: [
+          'default',
+          {
+            discardComments: {
+              removeAll: true,
+            },
+          },
+        ],
+      },
+      // 控制插件是否可以将消息打印到控制台，默认为 true
+      canPrint: true,
     }),
   ],
 };
