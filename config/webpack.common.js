@@ -114,6 +114,8 @@ module.exports = {
     }),
   ],
 
+  // performance: false, // 不输出警告信息
+
   optimization: {
     usedExports: true,
   },
