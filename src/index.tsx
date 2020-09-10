@@ -8,7 +8,6 @@ class App extends React.Component {
     const test = { a: 1 };
     const temp = _.cloneDeep(test);
     temp.a = 3;
-    console.log(test, temp);
     return <div className={styles.testBox}>hello world</div>;
   }
 }
