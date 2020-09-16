@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
 const path = require('path');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const devConfig = {
   mode: 'development',
@@ -45,7 +46,22 @@ const devConfig = {
     ],
   },
 
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: [
+          'Project is running at: ',
+          '\033[32m http://localhost:7001 \033[0m',
+          '\033[32m http://127.0.0.1:7001 \033[0m',
+        ],
+      },
+      onErrors: function (severity, errors) {
+        // You can listen to errors transformed and prioritized by the plugin
+        // severity can be 'error' or 'warning'
+      },
+    }),
+  ],
 
   devServer: {
     contentBase: './dist',
@@ -53,6 +69,7 @@ const devConfig = {
     port: 7001,
     hot: true,
     overlay: true, // 编译出现错误时，将错误直接显示在页面上
+    stats: 'errors-only',
   },
 
   stats: 'none',

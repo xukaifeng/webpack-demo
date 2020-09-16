@@ -4,7 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const WebpackBar = require('webpackbar');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -112,19 +111,6 @@ module.exports = {
       },
     }),
     new WebpackBar(),
-    new FriendlyErrorsWebpackPlugin({
-      compilationSuccessInfo: {
-        messages: [
-          'You application is running here: ',
-          '\033[32m http://localhost:7001 \033[0m',
-          '\033[32m http://127.0.0.1:7001 \033[0m',
-        ],
-      },
-      onErrors: function (severity, errors) {
-        // You can listen to errors transformed and prioritized by the plugin
-        // severity can be 'error' or 'warning'
-      },
-    }),
   ],
 
   // performance: false, // 不输出警告信息
