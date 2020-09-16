@@ -49,10 +49,13 @@ const devConfig = {
 
   devServer: {
     contentBase: './dist',
-    open: true,
+    // open: true,
     port: 7001,
     hot: true,
+    overlay: true, // 编译出现错误时，将错误直接显示在页面上
   },
+
+  stats: 'none',
 };
 
 module.exports = merge(commonConfig, devConfig);
