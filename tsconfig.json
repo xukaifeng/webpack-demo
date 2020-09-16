@@ -61,6 +61,6 @@
     }
   },
   // 指定需要编译的文件/目录，只写一个目录名 dirname 等价于 "./dirname/**/*"
-  "include": ["src", "./typings.d.ts"],
+  "include": ["./src/**/*", "./typings.d.ts"],
   "exclude": ["node_modules", "dist", "typings"]
 }
