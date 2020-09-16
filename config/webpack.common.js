@@ -3,6 +3,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const WebpackBar = require('webpackbar');
 
 module.exports = {
   entry: {
@@ -74,10 +75,7 @@ module.exports = {
     new HardSourceWebpackPlugin({
       // cacheDirectory是在高速缓存写入。默认情况下，将缓存存储在node_modules下的目录中
       // 'node_modules/.cache/hard-source/[confighash]'
-      cacheDirectory: path.join(
-        __dirname,
-        '../../node_modules/.cache/hard-source/[confighash]'
-      ),
+      cacheDirectory: path.join(__dirname, '../../node_modules/.cache/hard-source/[confighash]'),
       // configHash在启动webpack实例时转换webpack配置，
       // 并用于cacheDirectory为不同的webpack配置构建不同的缓存
       configHash: function (webpackConfig) {
@@ -112,6 +110,7 @@ module.exports = {
         sizeThreshold: 50 * 1024 * 1024,
       },
     }),
+    new WebpackBar(),
   ],
 
   // performance: false, // 不输出警告信息
