@@ -18,17 +18,6 @@ module.exports = {
         exclude: [/node_modules/, /public/, /(.|_)min\.js$/],
       },
       {
-        test: /\.(jpeg|pbg|jpg|gif)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 2048,
-            name: '[name]_[hash].[ext]',
-            outputPath: 'image/',
-          },
-        },
-      },
-      {
         test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         exclude: /node_modules/,
         use: {
@@ -41,12 +30,12 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|jpg|gif|jpeg|ico|cur)$/,
+        test: /\.(png|jpg|gif|jpeg|svg)$/,
         exclude: /node_modules/,
         use: {
           loader: 'url-loader',
           options: {
-            limit: 8192,
+            limit: 1024 * 10,
             name: '[name]_[contenthash:8].[ext]',
             outputPath: 'image/',
           },
