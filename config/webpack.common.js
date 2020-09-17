@@ -18,7 +18,7 @@ module.exports = {
         exclude: [/node_modules/, /public/, /(.|_)min\.js$/],
       },
       {
-        test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         exclude: /node_modules/,
         use: {
           loader: 'url-loader',
