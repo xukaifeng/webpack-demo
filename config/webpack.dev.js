@@ -52,8 +52,8 @@ const devConfig = {
       compilationSuccessInfo: {
         messages: [
           'Project is running at: ',
-          '\033[32m http://localhost:7001 \033[0m',
-          '\033[32m http://127.0.0.1:7001 \033[0m',
+          '\033[32m http://localhost:' + process.env.PORT + ' \033[0m',
+          '\033[32m http://127.0.0.1:' + process.env.PORT + ' \033[0m',
         ],
       },
       onErrors: function (severity, errors) {
@@ -66,7 +66,7 @@ const devConfig = {
   devServer: {
     contentBase: './dist',
     // open: true,
-    port: 7001,
+    port: process.env.PORT,
     hot: true,
     overlay: true, // 编译出现错误时，将错误直接显示在页面上
     stats: 'errors-only',

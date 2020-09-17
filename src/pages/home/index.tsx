@@ -23,6 +23,7 @@ class Home extends React.Component<IProps, IState> {
       <div>
         <Button onClick={this.handleClick}>Click me</Button>
         <div>{count}</div>
+        <div>1231234</div>
       </div>
     );
   }

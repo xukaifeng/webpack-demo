@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev-build": "webpack  --config ./config/webpack.dev.js",
-    "dev": "webpack-dev-server --env.development --config ./config/webpack.dev.js",
+    "dev": "cross-env NODE_ENV=development PORT=7001 webpack-dev-server --env.development --config ./config/webpack.dev.js",
     "build": "webpack --config  ./config/webpack.prod.js",
     "push": "node ./scripts/push.js"
   },
@@ -22,12 +22,14 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
     "@babel/runtime-corejs2": "^7.11.2",
+    "@types/lodash": "^4.14.161",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "autoprefixer": "^9.8.6",
     "babel-loader": "^8.1.0",
     "babel-plugin-import": "^1.13.0",
     "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
     "css-loader": "^4.2.0",
     "cssnano": "^4.1.10",
     "file-loader": "^6.0.0",
@@ -53,8 +55,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@types/lodash": "^4.14.161",
     "antd": "^4.6.4",
+    "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
