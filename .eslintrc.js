@@ -25,12 +25,24 @@ module.exports = {
   // "off" 或 0 - 关闭规则
   // "warn" 或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出)
   // "error" 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
+
+  settings: {
+    react: {
+      // React version. "detect" automatically picks the version you have installed.
+      // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
+      // default to latest and warns if missing
+      // It will default to "detect" in the future
+      version: 'detect',
+    },
+  },
   rules: {
     '@typescript-eslint/no-unused-vars': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/camelcase': 0,
+    // 函数需要标注返回值类型
+    '@typescript-eslint/explicit-module-boundary-types': 0,
     // 建议使用 let 或 const 而不是 var
     'no-var': 'warn',
   },

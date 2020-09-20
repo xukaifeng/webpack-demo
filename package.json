@@ -7,7 +7,8 @@
     "dev-build": "webpack  --config ./config/webpack.dev.js",
     "dev": "cross-env NODE_ENV=development PORT=7001 webpack-dev-server --env.development --config ./config/webpack.dev.js",
     "build": "webpack --config  ./config/webpack.prod.js",
-    "push": "node ./scripts/push.js"
+    "push": "node ./scripts/push.js",
+    "eslint": "eslint src"
   },
   "keywords": [],
   "author": "kaifeng",

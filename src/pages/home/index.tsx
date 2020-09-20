@@ -9,7 +9,7 @@ interface IState {
 }
 
 class Home extends React.Component<IProps, IState> {
-  constructor(props) {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       count: 0,
