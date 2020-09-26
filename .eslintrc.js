@@ -8,6 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
   ],
   // ESLint指定解析器 默认使用Espree作为其解析器
   parser: '@typescript-eslint/parser',
