@@ -1,3 +1,7 @@
 node_modules
 
 dist
+!.gitignore
+!.babelrc
+!.eslintrc.js
+!.prettierignore
