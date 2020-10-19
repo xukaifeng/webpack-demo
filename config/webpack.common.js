@@ -45,6 +45,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.less', '.css', '.json'],
+    mainFiles: ['index'],
     plugins: [
       // 将 tsconfig.json 中的路径配置映射到 webpack 中
       new TsconfigPathsPlugin({
